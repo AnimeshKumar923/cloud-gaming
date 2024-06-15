@@ -8,10 +8,10 @@ const GameCard = ({ game }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 cursor-pointer" onClick={openExternalGame}>
+    <div className="bg-white shadow-md rounded-lg p-4 cursor-pointer bg-gradient-to-r from-purple-500 via-sky-500 to-fuchsia-500" onClick={openExternalGame}>
       <h2 className="text-xl font-semibold mb-2">{game.title}</h2>
-      <p className="text-gray-700 mb-2">{game.description}</p>
-      <p className="text-gray-500">{game.genre}</p>
+      <p className="text-gray-100 mb-2">{game.description}</p>
+      <p className="text-gray-100">{game.genre}</p>
     </div>
   );
 };

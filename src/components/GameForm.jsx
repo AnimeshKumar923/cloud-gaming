@@ -21,7 +21,7 @@ const GameForm = ({ addGame }) => {
 
   return (
     <form className="bg-white shadow-md rounded-lg p-4 mt-4" onSubmit={handleSubmit}>
-      <h2 className="text-xl font-semibold mb-4">Add New Game</h2>
+      <h2 className="text-xl font-semibold mb-4 text-slate-500">Add New Game</h2>
       <input
         type="text"
         className="w-full px-3 py-2 mb-3 border rounded-md"
