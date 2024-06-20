@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GameCard from './GameCard';
 
-const games = [
-  { id: 1, title: 'Tic Tac Toe', genre: 'Casual', description: 'A classic tic tac toe game to play with your friends' }
-];
+// Assuming GameList receives games as a prop
+const GameList = ({ games }) => {
+  // Local state to store games
+  const [localGames, setLocalGames] = useState(games);
 
-const GameList = () => {
+  // Effect to update localGames when games prop changes
+  useEffect(() => {
+    setLocalGames(games);
+  }, [games]);
+
   return (
     <div className="grid grid-cols-3 gap-4 mt-4">
-      {games.map(game => (
+      {localGames.map(game => (
         <GameCard key={game.id} game={game} />
       ))}
     </div>

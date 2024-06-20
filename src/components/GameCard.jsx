@@ -1,10 +1,10 @@
 import React from 'react';
 
 const GameCard = ({ game }) => {
-  const externalGameUrl = 'https://animeshkumar923.github.io/test-repo/cc-summer-training-projects/tic-tac-toe'; // Replace with actual external game URL
+  // const externalGameUrl = 'https://animeshkumar923.github.io/test-repo/cc-summer-training-projects/tic-tac-toe'; // Replace with actual external game URL
 
   const openExternalGame = () => {
-    window.open(externalGameUrl, '_blank');
+    window.open(game.url, '_blank');
   };
 
   return (
