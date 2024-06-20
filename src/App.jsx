@@ -4,8 +4,7 @@ import GameForm from './components/GameForm';
 
 function App() {
   const [games, setGames] = useState([
-    { id: 1, title: 'Game 1', genre: 'Action', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { id: 2, title: 'Game 2', genre: 'Adventure', description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { id: 1, title: 'Tic Tac Toe', genre: 'Casual', description: 'A classic tic tac toe game to play with your friends', url: 'https://animeshkumar923.github.io/test-repo/cc-summer-training-projects/tic-tac-toe' },
     // Add more games as needed
   ]);
 
@@ -14,10 +13,11 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-semibold mb-4 ">Cloud Gaming Platform</h1>
+    <div className="flex justify-between flex-col container mx-auto p-4">
+      <h1 className="self-center text-3xl font-semibold mb-4 ">Cloud Gaming Platform</h1>
       <GameForm addGame={addGame} />
-      <h2 className="text-2xl font-semibold mt-8 mb-4">Available Games</h2>
+      <hr />
+      <h2 className="self-center text-2xl font-semibold mt-8 mb-4">Available Games</h2>
       <GameList games={games} />
     </div>
   );
