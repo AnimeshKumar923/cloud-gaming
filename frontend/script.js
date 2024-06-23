@@ -1,52 +1,64 @@
-// Sample initial games (simulating a backend)
-let games = [
-  { id: 1, title: 'Tic Tac Toe', genre: 'Casual', description: 'https://animeshkumar923.github.io/test-repo/cc-summer-training-projects/tic-tac-toe/' }
-];
-
 const gameForm = document.getElementById('gameForm');
 const gameList = document.getElementById('gameList');
 
-// Function to render games
-function renderGames() {
-  gameList.innerHTML = '';
+// Function to fetch and render games
+async function renderGames() {
+  try {
+    const response = await fetch('http://localhost:3000/games');
+    const games = await response.json();
 
-  games.forEach(game => {
-    const gameCard = document.createElement('div');
-    gameCard.classList.add('game-card');
-    gameCard.innerHTML = `
-      <h2>${game.title}</h2>
-      <a href=${game.description} target = _blank> Click here to play</a>
-      <p><strong>Genre:</strong> ${game.genre}</p>
-    `;
-    gameList.appendChild(gameCard);
-  });
+    gameList.innerHTML = '';
+    games.forEach(game => {
+      const gameCard = document.createElement('div');
+      gameCard.classList.add('game-card');
+      gameCard.innerHTML = `
+        <h2>${game.title}</h2>
+        <a href="${game.gameLink}" target="_blank">Click here to play</a>
+        <p><strong>Genre:</strong> ${game.genre}</p>
+      `;
+      gameList.appendChild(gameCard);
+    });
+  } catch (error) {
+    console.error('Error fetching games:', error);
+  }
 }
 
 // Function to handle form submission
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
   event.preventDefault();
 
   const title = document.getElementById('title').value;
   const genre = document.getElementById('genre').value;
-  const description = document.getElementById('description').value;
+  const gameLink = document.getElementById('gameLink').value;
 
-  if (title && genre && description) {
+  if (title && genre && gameLink) {
     const newGame = {
-      id: games.length + 1, // Mock ID generation (replace with backend logic)
       title: title,
       genre: genre,
-      description: description
+      gameLink: gameLink
     };
 
-    games.push(newGame);
-    renderGames();
-    gameForm.reset(); // Reset form fields
+    try {
+      const response = await fetch('http://localhost:3000/games', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newGame)
+      });
+
+      if (response.ok) {
+        renderGames();
+        gameForm.reset();
+      } else {
+        console.error('Error adding game:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding game:', error);
+    }
   } else {
     alert('Please fill out all fields.');
   }
 }
 
-// Event listener for form submission
 gameForm.addEventListener('submit', handleFormSubmit);
 
 // Initial render of games
