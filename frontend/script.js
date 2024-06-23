@@ -15,7 +15,7 @@ function renderGames() {
     gameCard.classList.add('game-card');
     gameCard.innerHTML = `
       <h2>${game.title}</h2>
-      <a href=${game.description} target = _parent> Click here to play</a>
+      <a href=${game.description} target = _blank> Click here to play</a>
       <p><strong>Genre:</strong> ${game.genre}</p>
     `;
     gameList.appendChild(gameCard);
