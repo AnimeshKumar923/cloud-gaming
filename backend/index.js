@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const AWS = require('aws-sdk');
+require('dotenv').config(); // Load environment variables from .env file
+
 const app = express();
 const port = 3000;
-require('dotenv').config();
 
-// Configure AWS SDK
+// Configure AWS SDK using environment variables
 AWS.config.update({
   region: process.env.AWS_REGION,
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   next();
 });
 
@@ -57,6 +59,27 @@ app.post('/games', (req, res) => {
       res.status(500).send(err);
     } else {
       res.send({ message: 'Game added successfully!', game: params.Item });
+    }
+  });
+});
+
+// Route to delete a game
+app.delete('/games/:id', (req, res) => {
+  const { id } = req.params;
+
+  const params = {
+    TableName: 'Games',
+    Key: {
+      id: id
+    }
+  };
+
+  dynamoDB.delete(params, (err, data) => {
+    if (err) {
+      console.error('Error deleting data: ', err);
+      res.status(500).send(err);
+    } else {
+      res.send({ message: 'Game deleted successfully!', id: id });
     }
   });
 });

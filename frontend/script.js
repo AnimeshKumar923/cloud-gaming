@@ -15,8 +15,15 @@ async function renderGames() {
         <h2>${game.title}</h2>
         <a href="${game.gameLink}" target="_blank">Click here to play</a>
         <p><strong>Genre:</strong> ${game.genre}</p>
+        <button class="delete-btn" data-id="${game.id}">Delete</button>
       `;
       gameList.appendChild(gameCard);
+    });
+
+    // Add event listeners to delete buttons
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', handleDelete);
     });
   } catch (error) {
     console.error('Error fetching games:', error);
@@ -56,6 +63,25 @@ async function handleFormSubmit(event) {
     }
   } else {
     alert('Please fill out all fields.');
+  }
+}
+
+// Function to handle delete button click
+async function handleDelete(event) {
+  const id = event.target.dataset.id;
+
+  try {
+    const response = await fetch(`http://localhost:3000/games/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (response.ok) {
+      renderGames();
+    } else {
+      console.error('Error deleting game:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error deleting game:', error);
   }
 }
 
