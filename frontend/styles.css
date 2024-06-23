@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #d3a2a2;
   margin: 0;
   padding: 0;
 }
@@ -10,8 +10,10 @@ body {
   margin: 20px auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  box-shadow: 0 0 35px rgb(2, 238, 255);
+  border-radius: 20px;
+  border: 8px outset rgba(255, 0, 0, 0.904);
+
 }
 
 .heading {
