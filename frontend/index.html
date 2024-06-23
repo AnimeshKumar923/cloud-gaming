@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Gaming Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="heading">Cloud Gaming Platform</h1>
+
+    <form id="gameForm" class="game-form">
+      <h2 class="form-heading">Add New Game</h2>
+      <input type="text" id="title" class="form-input" placeholder="Title" required>
+      <input type="text" id="genre" class="form-input" placeholder="Genre" required>
+      <textarea id="gameLink" class="form-input" placeholder="Game Link" rows="3" required></textarea>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <h2 class="game-list-heading">Available Games</h2>
+    <div id="gameList" class="game-list"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
