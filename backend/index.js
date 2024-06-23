@@ -1,20 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const AWS = require('aws-sdk');
-
 const app = express();
 const port = 3000;
+require('dotenv').config();
 
 // Configure AWS SDK
 AWS.config.update({
-  region: 'your-aws-region', // e.g., 'us-east-1'
-  accessKeyId: 'your-access-key-id',
-  secretAccessKey: 'your-secret-access-key'
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Route to get all games
 app.get('/games', (req, res) => {
