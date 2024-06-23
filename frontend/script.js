@@ -1,6 +1,6 @@
 // Sample initial games (simulating a backend)
 let games = [
-  { id: 1, title: 'Game 1', genre: 'Action', gameLink: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+  { id: 1, title: 'Tic Tac Toe', genre: 'Casual', description: 'https://animeshkumar923.github.io/test-repo/cc-summer-training-projects/tic-tac-toe/' }
 ];
 
 const gameForm = document.getElementById('gameForm');
@@ -15,7 +15,7 @@ function renderGames() {
     gameCard.classList.add('game-card');
     gameCard.innerHTML = `
       <h2>${game.title}</h2>
-      <p>${game.gameLink}</p>
+      <a href=${game.description} target = _parent> Click here to play</a>
       <p><strong>Genre:</strong> ${game.genre}</p>
     `;
     gameList.appendChild(gameCard);
@@ -28,14 +28,14 @@ function handleFormSubmit(event) {
 
   const title = document.getElementById('title').value;
   const genre = document.getElementById('genre').value;
-  const gameLink = document.getElementById('gameLink').value;
+  const description = document.getElementById('description').value;
 
-  if (title && genre && gameLink) {
+  if (title && genre && description) {
     const newGame = {
       id: games.length + 1, // Mock ID generation (replace with backend logic)
       title: title,
       genre: genre,
-      gameLink: description
+      description: description
     };
 
     games.push(newGame);
